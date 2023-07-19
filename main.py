@@ -22,6 +22,7 @@ if __name__ == "__main__":
     print(data.df.info(verbose=True))
     print(f"непустых значений в столбце 'A': {data.df[data.df.columns[0]].count()}", "\n")
 
+
     x = dbControl("quote.sqlite")
     with x as db:
         x.inform_db()
