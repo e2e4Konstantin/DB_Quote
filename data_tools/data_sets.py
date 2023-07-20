@@ -14,8 +14,10 @@ class SourceData:
         self.df: pandas.DataFrame() = None
         self.row_max = 0
         self.column_max = 0
+        self.column_number = {}
         self.get_full_name()
         self.get_data()
+        self.column_number_generate()
 
     def get_full_name(self):
         fullpath = os.path.abspath(os.path.join(self.file_path, self.file_name))
@@ -41,6 +43,20 @@ class SourceData:
         return f"файл: {self.full_path}\nтаблица: {self.sheet_name}', строк: {self.row_max + 1}, столбцов: {self.column_max + 1}\n" \
                f"pandas.version: {pandas.__version__}"
 
+    def column_number_generate(self):
+        alphabet = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+        alphabet.extend([alphabet[0] + v for v in alphabet])
+        lc_alphabet = list('abcdefghijklmnopqrstuvwxyz')
+        lc_alphabet.extend([lc_alphabet[0] + v for v in lc_alphabet])
+        self.column_number = {v: i for i, v in enumerate(alphabet)}
+        self.column_number.update({v: i for i, v in enumerate(lc_alphabet)})
 
+    def cell_value(self, row, column) -> any:
+        if row >= 0 and column >= 0:
+            value = self.df.iat[row, column]
+            if pandas.isna(value):
+                return None
+            return value
+        return None
 
 
