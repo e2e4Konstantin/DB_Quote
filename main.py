@@ -1,6 +1,4 @@
-import re
-from data_tools import SourceData
-
+from data_tools import SourceData, get_quote
 from db_tools import dbControl, build_tables, write_quote
 
 paths = {
@@ -14,7 +12,7 @@ source_files = {
 }
 
 fn = 5
-pl = "office"  # "office" "home"
+pl = "home"  # "office" "home"
 dset = (source_files[fn][0], paths[pl], source_files[fn][1])
 
 # group, cod, name, item, metric
@@ -30,9 +28,6 @@ print(data, "\n")
 print(data.df.info(verbose=True))
 print(f"непустых значений в столбце 'A': {data.df[data.df.columns[0]].count()}", "\n")
 
-digit_pattern = re.compile(r"^\d+")
-
-
 
 def main():
     # for row in range(1, data.row_max+1):
@@ -42,14 +37,13 @@ def main():
     x = dbControl("quote.sqlite")
     with x as db:
         build_tables(db)
-        for row in range(1, data.row_max + 1):      # data.row_max + 1
-            quote: tuple = get_quote(row)
+        for row in range(1, data.row_max + 1):  # data.row_max + 1
+            quote: tuple = get_quote(row, data)
             write_quote(quote, db)
 
         # write_quote(test_quote[0], db)
         # write_quote(test_quote[1], db)
         x.inform_db()
-
 
 
 if __name__ == "__main__":
