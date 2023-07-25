@@ -1,16 +1,16 @@
 import itertools
 
-
 units_measure = {
     'метр': ["м", "метры", "метров", "метра"],
     'метр квадратный': ["м2", "м 2", "метр 2", "метров 2", "метра 2"],
     'метр кубический': ["м3", "м 3", "метр 3", "метров 3", "метра 3"],
-    'метр погонный': ["пог м", "п м",  "пог метр"],
+    'метр погонный': ["пог м", "п м", "пог метр"],
     'тонна': ["т", "тонн", "тонны"],
     'килограмм': ["кг", "килограммов", "килограмма"],
     'километр': ["км", "километров", "километра"],
     'миллиметр': ["мм", "миллиметра", "миллиметров"],
 }
+
 
 #
 # def add_dots(sentence: str) -> list[str] | None:
@@ -25,7 +25,7 @@ units_measure = {
 def add_dots(words: list[str]) -> list[str] | None:
     if len(words) > 0:
         dotted_words = []
-        [dotted_words.append(f"{word}.")for word in words]
+        [dotted_words.append(f"{word}.") for word in words]
         return dotted_words
     return None
 
@@ -61,26 +61,43 @@ print(s1, s2)
 s1[1], s2[0] = s2[0], s1[1]
 s3 = []
 
-[s3.extend(["".join(list(x))," ".join(list(x))]) for x in itertools.product(s1, s2) if x[0].replace('.', '') != x[1].replace('.', '')]
+[s3.extend(["".join(list(x)), " ".join(list(x))]) for x in itertools.product(s1, s2) if
+ x[0].replace('.', '') != x[1].replace('.', '')]
 
 # s3 = [("".join(list(x))," ".join(list(x))) for x in itertools.product(s1, s2) if x[0].replace('.', '') != x[1].replace('.', '')]
 # s4 = []
 # [s4.extend(list(x)) for x in s3]
 print(s1, s2)
 print(s3)
+
+
 # print(s4)
+
+def mix_dot(src_text: str) -> list[str] | None:
+    if src_text:
+        words = src_text.strip().split(" ")[:2]
+        dot_word = add_dots(words)
+        print(words, dot_word)
+        if len(words) > 1:
+            words[1], dot_word[0] = dot_word[0], words[1]
+            result = []
+            [result.extend(["".join(list(x)), " ".join(list(x))]) for x in itertools.product(words, dot_word) if
+             x[0].replace('.', '') != x[1].replace('.', '')]
+            print(words, dot_word, result)
+            return result
+        else:
+            words.extend(dot_word)
+            return words
+    return None
+
+
+print(mix_dot('метр 2 gfgf'))
 
 
 # s1.extend(add_dots(s1))
 # print(s1)
 # b = [x for x in itertools.permutations(s1, length) if x[0].replace('.', '') != x[1].replace('.', '')]
 # print(b)
-
-
-
-
-
-
 
 
 def words_permutations(synonyms: list[str]) -> list[str] | None:
@@ -95,7 +112,6 @@ def words_permutations(synonyms: list[str]) -> list[str] | None:
         return result
     return None
 
-
 # a = words_permutations(units_measure['метр квадратный'])
 # print(a)
 
@@ -106,4 +122,3 @@ def words_permutations(synonyms: list[str]) -> list[str] | None:
 #
 #
 #     # unit_measure_guide[x]
-
