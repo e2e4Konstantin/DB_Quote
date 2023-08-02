@@ -1,5 +1,6 @@
-from data_tools import SourceData
 import re
+from setting import SourceData
+from .chew_measure_data import chew_measure_data
 
 digit_pattern = re.compile(r"^\d+")
 
@@ -28,7 +29,13 @@ def get_quote(row: int, data: SourceData) -> tuple | None:
         return None
     else:
         index_column_e = 3
-        unit = get_just_digits(result[index_column_e], digit_pattern) if result[index_column_e] else (1, result[index_column_e])
+
+        # unit = get_just_digits(result[index_column_e], digit_pattern) if result[index_column_e] else (1, result[index_column_e])
+        # result.pop(3)
+        # result[3:2] = list(unit)
+
+        unit = chew_measure_data(result[index_column_e])
         result.pop(3)
-        result[3:2] = list(unit)
+        result[3:3] = list(unit)
+
         return tuple(result)

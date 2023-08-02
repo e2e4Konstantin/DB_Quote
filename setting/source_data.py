@@ -2,10 +2,9 @@ import os
 import sys
 import pandas
 
-DEBUG_ON = False
-
 
 class SourceData:
+    """ Для хранения сырых данных из excel файла в формате pandas.df """
     def __init__(self, file_name, file_path, sheet_name):
         self.file_name = file_name
         self.file_path = file_path
@@ -31,8 +30,8 @@ class SourceData:
             if self.full_path:
                 self.df = pandas.read_excel(self.full_path, sheet_name=self.sheet_name, header=None, dtype="object")
                 if not self.df.empty:
-                    self.row_max = self.df.shape[0]-1
-                    self.column_max = self.df.shape[1]-1
+                    self.row_max = self.df.shape[0] - 1
+                    self.column_max = self.df.shape[1] - 1
                 else:
                     raise TypeError(self.__class__)
         except Exception as err:
@@ -40,7 +39,7 @@ class SourceData:
             sys.exit()
 
     def __str__(self):
-        return f"файл: {self.full_path}\nтаблица: {self.sheet_name}', строк: {self.row_max + 1}, столбцов: {self.column_max + 1}\n" \
+        return f"файл: {self.full_path}\nтаблица: '{self.sheet_name}', строк: {self.row_max + 1}, столбцов: {self.column_max + 1}\n" \
                f"pandas.version: {pandas.__version__}"
 
     def column_number_generate(self):
@@ -58,5 +57,3 @@ class SourceData:
                 return None
             return value
         return None
-
-
