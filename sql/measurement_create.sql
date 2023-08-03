@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS tblPhysicalPropertys(
 		UNIQUE (name_rus, name_eng)				
 );
 
-INSERT INTO tblPhysicalPropertys (name_rus, name_eng, short_name) VALUES 
+INSERT INTO tblPhysicalPropertys (name_rus, name_eng, short_name) VALUES
+	('напряжение', 'voltage', 'v'),
 	('площадь', 'square', 's'),
 	('масса', 'mass', 'n'),
 	('количество', 'quantity', 'n'),
@@ -35,6 +36,8 @@ CREATE TABLE tblMeasurementUnits(
 );
 
 INSERT INTO tblMeasurementUnits (name_rus, name_eng, short_name_rus, short_name_eng, basis, multiplier, FK_tblPhysicalProperty_tblMeasurementUnits) VALUES
+('вольт', 'volt', 'в', 'v', 1, 1,  (SELECT ID_tblPhysicalProperty FROM tblPhysicalPropertys WHERE name_rus = 'напряжение')),
+('киловольт', 'kilovolt', 'кВ', 'kV', 0, 1000,  (SELECT ID_tblPhysicalProperty FROM tblPhysicalPropertys WHERE name_rus = 'напряжение')),
 ('метр', 'metr', 'м', 'm', 1, 1,  (SELECT ID_tblPhysicalProperty FROM tblPhysicalPropertys WHERE name_rus = 'длинна')),
 ('миллиметр', 'millimeter', 'мм', 'mm', 0, 0.001, (SELECT ID_tblPhysicalProperty FROM tblPhysicalPropertys WHERE name_rus = 'длинна' )),
 ('километр', 'kilometer', 'км', 'km', 0, 1000.0, (SELECT ID_tblPhysicalProperty FROM tblPhysicalPropertys WHERE name_rus = 'длинна' )),
@@ -42,6 +45,7 @@ INSERT INTO tblMeasurementUnits (name_rus, name_eng, short_name_rus, short_name_
 ('метр кубический', 'cubic meter', 'м3', 'm3', 1, 1, (SELECT ID_tblPhysicalProperty FROM tblPhysicalPropertys WHERE name_rus = 'объем' )),
 ('метр погонный', 'meter linea', 'мп', 'lm', 0, 1, (SELECT ID_tblPhysicalProperty FROM tblPhysicalPropertys WHERE name_rus = 'длинна' )),
 ('штука', 'unit', 'шт', 'u', 1, 1, (SELECT ID_tblPhysicalProperty FROM tblPhysicalPropertys WHERE name_rus = 'количество' ));
+
 
 
 
