@@ -6,7 +6,7 @@ from data_fetch import get_quote  #, pull_data_from_storage
 
 
 def main():
-    data = pull_data("PICLE", "HOME", )   # "PICLE" "FILE"
+    data = pull_data("PICLE", "OFFICE", 1)   # "PICLE" "FILE" / "OFFICE" "HOME"
     print(data)
     for row in range(1, data.row_max+1):
         quote = get_quote(row, data)

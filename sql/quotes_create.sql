@@ -24,7 +24,8 @@ PRAGMA table_info(tblQuotes);
                 
 INSERT INTO tblQuotes
 (description, cod, catalog_cod, zoom, stat_sum, parent, FK_tblQuotes_tblDefinitions, FK_tblQuotes_tblMeasuringObjects, FK_tblQuotes_tblMeasurementUnits) VALUES 
-	('Разработка грунта в отвал экскаваторами с ковшом вместимостью 1,8 м3 группа грунтов 4', '3.1-1-2', '3.1-1-1-0-1', 100, 1, NULL, 
+	(	'Разработка грунта в отвал экскаваторами с ковшом вместимостью 1,8 м3 группа грунтов 4', 
+		'3.1-1-2', '3.1-1-1-0-1', 100, 1, NULL, 
 	 	(SELECT ID_tblDefinition FROM tblDefinitions WHERE name = 'разработка'),
 	 	(SELECT ID_tblMeasuringObject FROM tblMeasuringObjects WHERE name = 'грунт'),
 	 	(SELECT ID_tblMeasurementUnit FROM tblMeasurementUnits WHERE name_rus = 'метр кубический'));

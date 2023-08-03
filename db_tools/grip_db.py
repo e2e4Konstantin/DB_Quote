@@ -1,7 +1,7 @@
 import sqlite3
 
 
-class dbControl:
+class GripDB:
     def __init__(self, db_file_name: str = None):
         self.db_file_name = db_file_name
         self.connect = None

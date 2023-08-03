@@ -38,7 +38,7 @@ def file_route(place: str, file_number: int) -> tuple[str, str, str]:
         sys.exit()
 
     local_paths = {
-        "OFFICE": r"C:\Users\kazak.ke\PycharmProjects\Quotes_Parsing\output",
+        "OFFICE": r"C:\Users\kazak.ke\PycharmProjects\DB_Quote\src_data",
         "HOME": r"F:\Kazak\Google Диск\1_KK\Job_CNAC\Python_projects\DB_Quote\src_data",
     }
     return source_files[file_number][0], local_paths[place], source_files[file_number][1]
