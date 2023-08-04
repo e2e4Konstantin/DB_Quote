@@ -31,8 +31,21 @@ class GripDB:
             self.connect.commit()
             self.cursor.close()
             self.connect.close()
+            self.connect = None
+            self.cursor = None
 
-    def inform_db(self):
+    def inform(self) -> None:
+        if not self.connect:
+            self.connect_db()
+        else:
+            if not self.cursor:
+                try:
+                    self.cursor = self.connect.cursor()
+                except sqlite3.Error as err:
+                    self.close_db()
+                    print(f"ошибка открытия БД Sqlite3: {err}")
+                    return None
+        print("------------>>", self.cursor)
         self.cursor.execute('SELECT SQLITE_VERSION()')
         print(f"SQLite version: {self.cursor.fetchone()[0]}")
         print(f"connect.total_changes: {self.connect.total_changes}")
@@ -47,4 +60,10 @@ class GripDB:
             data = table_info.fetchall()
             print(f"поля таблицы: ")
             [print(f"\t{d}") for d in data]
+        self.close_db()
+
+
+
+
+
 

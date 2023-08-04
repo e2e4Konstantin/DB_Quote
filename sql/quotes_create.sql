@@ -1,21 +1,22 @@
-
+DROP TABLE tblQuotes
 CREATE TABLE IF NOT EXISTS tblQuotes
-                (
-                    ID_tblQuote		INTEGER PRIMARY KEY,
-                    description		TEXT NOT NULL, 								-- подробное название расценки
-                    cod 			TEXT NOT NULL,								-- код расценки
-                    catalog_cod 	TEXT NOT NULL,								-- код таблицы классификатора     
-                    zoom 			INTEGER DEFAULT 1 CHECK (zoom > 0),			-- коэффициент масштабирования
-                    stat_sum 		INTEGER DEFAULT 0 CHECK (stat_sum >= 0),	-- статистика использования
-                    parent 			TEXT DEFAULT NULL,							-- код родительской расценки
-                    FK_tblQuotes_tblDefinitions INTEGER NOT NULL,				-- определение расценки: разработка/устройство/...
-                    FK_tblQuotes_tblMeasuringObjects INTEGER NOT NULL,			-- что измеряет: грунт/трубопровод/...
-                    FK_tblQuotes_tblMeasurementUnits INTEGER NOT NULL,			-- в чем измеряется метр/километр/штука...                    
-                    FOREIGN KEY (FK_tblQuotes_tblDefinitions) REFERENCES tblDefinitions(ID_tblDefinition),
-                    FOREIGN KEY (FK_tblQuotes_tblMeasuringObjects) REFERENCES tblMeasuringObjects(ID_tblMeasuringObject),
-                    FOREIGN KEY (FK_tblQuotes_tblMeasurementUnits) REFERENCES tblMeasurementUnits(ID_tblMeasurementUnit),
-                    UNIQUE (cod)
-                );
+    (
+        ID_tblQuote		 INTEGER PRIMARY KEY,
+        description		 TEXT NOT NULL, 							-- подробное название расценки
+        cod 			 TEXT NOT NULL,								-- код расценки
+        catalog_cod 	 TEXT NOT NULL,								-- код таблицы классификатора
+        measurement_text TEXT DEFAULT NULL,                         -- сырой текст измерения расценки
+        zoom 			 INTEGER DEFAULT 1 CHECK (zoom > 0),		-- коэффициент масштабирования
+        stat_sum 		 INTEGER DEFAULT 0 CHECK (stat_sum >= 0),	-- статистика использования
+        parent 			 TEXT DEFAULT NULL,							-- код родительской расценки
+        FK_tblQuotes_tblDefinitions INTEGER NOT NULL,				-- определение расценки: разработка/устройство/...
+        FK_tblQuotes_tblMeasuringObjects INTEGER NOT NULL,			-- что измеряет: грунт/трубопровод/...
+        FK_tblQuotes_tblMeasurementUnits INTEGER NOT NULL,			-- в чем измеряется метр/километр/штука...
+        FOREIGN KEY (FK_tblQuotes_tblDefinitions) REFERENCES tblDefinitions(ID_tblDefinition),
+        FOREIGN KEY (FK_tblQuotes_tblMeasuringObjects) REFERENCES tblMeasuringObjects(ID_tblMeasuringObject),
+        FOREIGN KEY (FK_tblQuotes_tblMeasurementUnits) REFERENCES tblMeasurementUnits(ID_tblMeasurementUnit),
+        UNIQUE (cod)
+    );
 CREATE UNIQUE INDEX idx_cod_tblQuotes ON tblQuotes (cod);
 
 
