@@ -69,6 +69,12 @@ db_queries = {
 
     "INSERT_PHYSICAL_PROPERTIES": """INSERT INTO tblPhysicalProperties (name_rus, name_eng, short_name) VALUES (?, ?, ?) RETURNING ID_tblPhysicalProperty;""",
     "DELETE_DATA_FROM_PHYSICAL_PROPERTIES": """DELETE FROM tblPhysicalProperties;""",
+
+    "GET_ID_PHYSICAL_PROPERTY": """SELECT ID_tblPhysicalProperty FROM tblPhysicalProperties WHERE name_rus = ?""",
+    
+    
+    
+    
     # -------------------------------------------------------------------------------------------------------------
     "CREATE_TABLE_MEASUREMENT_UNITS": """
         CREATE TABLE IF	NOT EXISTS tblMeasurementUnits 
@@ -88,5 +94,5 @@ db_queries = {
     "CREATE_INDEX_MEASUREMENT_UNITS": """CREATE UNIQUE INDEX idx_name_tblMeasurementUnits ON tblMeasurementUnits (name_rus);""",
     "DROP_INDEX_MEASUREMENT_UNITS": """DROP INDEX IF EXISTS idx_name_tblMeasurementUnits;""",
 
-    "INSERT_MEASUREMENT_UNITS": """tblMeasurementUnits (name_rus, name_eng, short_name_rus, short_name_eng, basis, multiplier, FK_tblPhysicalProperties_tblMeasurementUnits) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING ID_tblMeasurementUnit;""",
+    "INSERT_MEASUREMENT_UNITS": """INSERT INTO tblMeasurementUnits (name_rus, name_eng, short_name_rus, short_name_eng, basis, multiplier, FK_tblPhysicalProperties_tblMeasurementUnits) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING ID_tblMeasurementUnit;""",
 }

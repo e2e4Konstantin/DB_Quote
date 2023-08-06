@@ -1,9 +1,15 @@
 import os
 
 console_colors = {
-    "YELLOW": "\u001b[38;5;11m",
-    "RESET": "\u001b[0m"
+    "YELLOW":   "\u001b[38;5;11m",
+    "RESET":    "\u001b[0m",
+    "RED":      "\u001b[31m",
+    "GREEN":    "\u001b[32m",
 }
+
+
+
+
 
 BASIC = 1
 RELATED = 0
@@ -26,7 +32,7 @@ measurement_units = {
     ('тонна', 'ton', 'тон', 'ton', RELATED, 1_000, 'масса'),
     ('метр', 'metr', 'м', 'm', BASIC, 1, 'расстояние'),
     ('миллиметр', 'millimeter', 'мм', 'mm', RELATED, 0.001, 'расстояние'),
-    ('километр', 'kilometer', 'км', 'km', RELATED, 1_000.0, 'расстояние'),
+    ('километр', 'kilometer', 'км', 'km', RELATED, 1_000, 'расстояние'),
     ('метр погонный', 'meter linea', 'мп', 'lm', RELATED, 1, 'расстояние'),
     ('метр квадратный', 'meter square', 'м2', 'm2', BASIC, 1, 'площадь'),
     ('гектар', 'hectare', 'га', 'ha', RELATED, 10_000, 'площадь'),
