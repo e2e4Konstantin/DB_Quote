@@ -1,0 +1,4 @@
+
+
+CREATE TABLE IF	NOT EXISTS tblTables (ID_tblTables INTEGER PRIMARY KEY, cod TEXT NOT NULL, description TEXT NOT NULL,UNIQUE (code));
+
